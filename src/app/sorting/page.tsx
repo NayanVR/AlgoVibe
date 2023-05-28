@@ -55,7 +55,7 @@ export default function Sorting() {
           ref={visualizerRef}
         />
       </div>
-      <div className="m-2 p-2 sm:mb-8 w-full max-w-xl border-gray-300 border rounded-xl flex flex-col sm:flex-row gap-2">
+      <div className="m-2 p-2 mb-12 w-full max-w-xl border-gray-300 border rounded-xl flex flex-col sm:flex-row gap-2">
         <div className="w-full h-10 gap-2 flex">
           <button
             disabled={isControlsDisabled}
