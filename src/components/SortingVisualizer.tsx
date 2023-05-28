@@ -51,7 +51,7 @@ export const SortingVisualizer = forwardRef(
 
     const isActive = useRef<boolean>(true);
     const previousTimeRef = useRef<number>();
-    let interval = 200;
+    let interval = 100;
 
     function animate(time: number) {
       if (previousTimeRef.current === undefined) {
@@ -145,7 +145,7 @@ export const SortingVisualizer = forwardRef(
           onClick={(_) => {
             requestAnimationFrame(animate);
           }}
-          className="w-full h-4 bg-primary-dark rounded-md"
+          className="w-full h-4 bg-primary-dark rounded-sm"
         ></div>
       </div>
     );
