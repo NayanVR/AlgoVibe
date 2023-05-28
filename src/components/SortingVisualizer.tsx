@@ -19,23 +19,23 @@ type Props = {
   toggleControls: (value: boolean) => void;
 };
 
-const clientHeight: number = window.innerHeight;
-const clientWidth: number = window.innerWidth;
-
-const BAR_MIN_HEIGHT: number = 25;
-const BAR_MAX_HEIGHT: number = (2 * clientHeight) / 3;
-
-const totalWidth = clientWidth < 600 ? clientWidth - 16 : (2 * clientWidth) / 3;
-
 export const SortingVisualizer = forwardRef(
   ({ length, algo, allAlgos, toggleControls }: Props, ref) => {
     const [array, setArray] = useState<number[]>([]);
 
+    const [widthOfBar, setWidthOfBar] = useState(5);
+
     const arrayElements = useRef<HTMLDivElement[]>([]);
 
-    const widthOfBar = calculateArrayBarWidth(8, length, totalWidth);
-
     useEffect(() => {
+      const clientHeight: number = window.innerHeight;
+      const clientWidth: number = window.innerWidth;
+      const totalWidth =
+        clientWidth < 600 ? clientWidth - 16 : (2 * clientWidth) / 3;
+      setWidthOfBar(calculateArrayBarWidth(8, length, totalWidth));
+      const BAR_MIN_HEIGHT: number = 25;
+      const BAR_MAX_HEIGHT: number = (2 * clientHeight) / 3;
+
       setArray(randomArray(length, BAR_MIN_HEIGHT, BAR_MAX_HEIGHT));
       return () => setArray([]);
     }, [length]);
@@ -120,10 +120,7 @@ export const SortingVisualizer = forwardRef(
 
     return (
       <div className="flex h-full flex-col justify-end">
-        <div
-          className="flex gap-2 items-end"
-          style={{ width: `${totalWidth}px` }}
-        >
+        <div className="flex gap-2 items-end">
           {array.map((number, index) => {
             return (
               <div
@@ -134,8 +131,8 @@ export const SortingVisualizer = forwardRef(
                   width: `${widthOfBar}px`,
                 }}
               >
-                {((clientWidth < 600 && length <= 8) ||
-                  (clientWidth >= 600 && length <= 20)) &&
+                {((window.innerWidth < 600 && length <= 8) ||
+                  (window.innerWidth >= 600 && length <= 20)) &&
                   number}
               </div>
             );

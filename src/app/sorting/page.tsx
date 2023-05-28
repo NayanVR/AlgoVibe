@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsArrowRepeat } from "react-icons/bs";
 import { MdRocketLaunch } from "react-icons/md";
 import { BiPowerOff } from "react-icons/bi";
@@ -13,21 +13,24 @@ const sortingAlgos = {
   mergeSort: "Merge Sort",
 };
 
-const clientWidth = window.innerWidth;
-const MIN_ARRAY_BARS = clientWidth < 600 ? 5 : 10;
-const MAX_ARRAY_BARS = clientWidth < 600 ? 25 : 50;
-
 export default function Sorting() {
   const [sizeOfArray, setSizeOfArray] = useState<number>(20);
   const [selectedAlgo, setSelectedAlgo] = useState<string>(
     sortingAlgos.bubbleSort
   );
   const [isControlsDisabled, setIsControlsDisabled] = useState<boolean>(false);
+  const [minArrayBars, setMinArrayBars] = useState(5);
+  const [maxArrayBars, setMaxArrayBars] = useState(25);
 
   const visualizerRef = useRef<any>(null);
 
+  useEffect(() => {
+    setMinArrayBars(window.innerWidth < 600 ? 5 : 10);
+    setMaxArrayBars(window.innerWidth < 600 ? 25 : 50);
+  }, []);
+
   function handleGenerateClick(): void {
-    const newLength = randomInt(MIN_ARRAY_BARS, MAX_ARRAY_BARS);
+    const newLength = randomInt(minArrayBars, maxArrayBars);
     setSizeOfArray(newLength);
   }
 
@@ -69,8 +72,8 @@ export default function Sorting() {
               type="range"
               disabled={isControlsDisabled}
               onChange={(e) => setSizeOfArray(parseInt(e.target.value))}
-              min={MIN_ARRAY_BARS}
-              max={MAX_ARRAY_BARS}
+              min={minArrayBars}
+              max={maxArrayBars}
               value={sizeOfArray}
               step={1}
             />
