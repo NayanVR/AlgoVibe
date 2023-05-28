@@ -5,6 +5,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { MdRocketLaunch } from "react-icons/md";
 import { BiPowerOff } from "react-icons/bi";
 import SortingVisualizer from "@/components/SortingVisualizer";
+import { randomInt } from "@/util/functions";
 
 const sortingAlgos = {
   bubbleSort: "Bubble Sort",
@@ -14,27 +15,42 @@ const sortingAlgos = {
 };
 
 const clientWidth = document.documentElement.clientWidth;
+const MIN_ARRAY_BARS = clientWidth < 600 ? 5 : 10;
+const MAX_ARRAY_BARS = clientWidth < 600 ? 25 : 50;
 
 export default function Sorting() {
-  const [sizeOfArray, setSizeOfArray] = useState<number>(25);
+  const [sizeOfArray, setSizeOfArray] = useState<number>(20);
   const [selectedAlgo, setSelectedAlgo] = useState<string>(
     sortingAlgos.bubbleSort
   );
+  const [isControlsDisabled, setIsControlsDisabled] = useState(false);
 
-  function handleGenerateClick(): void {}
+  function handleGenerateClick(): void {
+    const newLength = randomInt(MIN_ARRAY_BARS, MAX_ARRAY_BARS);
+    setSizeOfArray(newLength);
+  }
 
-  function handleStartClick(): void {}
+  function handleStartClick(): void {
+    setIsControlsDisabled(true);
+  }
 
-  function handleKillClick(): void {}
+  function handleKillClick(): void {
+    setIsControlsDisabled(false);
+  }
 
   return (
     <section className="relative flex flex-col gap-4 sm:gap-8 h-screen items-center px-2">
       <div className="h-full">
-        <SortingVisualizer length={sizeOfArray} />
+        <SortingVisualizer
+          length={sizeOfArray}
+          algo={selectedAlgo}
+          allAlgos={sortingAlgos}
+        />
       </div>
       <div className="m-2 p-2 sm:mb-8 w-full max-w-xl border-gray-300 border rounded-xl flex flex-col sm:flex-row gap-2">
         <div className="w-full h-10 gap-2 flex">
           <button
+            disabled={isControlsDisabled}
             className="h-10 min-w-[2.5rem] bg-primary hover:bg-primary-dark transition-all rounded-lg"
             onClick={handleGenerateClick}
           >
@@ -46,9 +62,10 @@ export default function Sorting() {
             </span>
             <input
               type="range"
+              disabled={isControlsDisabled}
               onChange={(e) => setSizeOfArray(parseInt(e.target.value))}
-              min={5}
-              max={clientWidth < 600 ? 25 : 50}
+              min={MIN_ARRAY_BARS}
+              max={MAX_ARRAY_BARS}
               value={sizeOfArray}
               step={1}
             />
@@ -56,6 +73,7 @@ export default function Sorting() {
         </div>
         <div className="w-full h-10 gap-2 flex">
           <select
+            disabled={isControlsDisabled}
             onChange={(e) => setSelectedAlgo(e.target.value)}
             value={selectedAlgo}
             className="h-10 w-full px-4 bg-[#f0f0f0] border border-tertiary font-text transition-all rounded-lg"
@@ -69,6 +87,7 @@ export default function Sorting() {
             })}
           </select>
           <button
+            disabled={isControlsDisabled}
             className="h-10 min-w-[2.5rem] bg-secondary hover:bg-secondary-dark transition-all rounded-lg"
             onClick={handleStartClick}
           >
