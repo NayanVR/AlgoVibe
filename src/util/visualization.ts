@@ -11,8 +11,11 @@ export function visualize(animation: Animation, barOne: HTMLDivElement, barTwo: 
     setTimeout(() => {
         if (animation.swap) {
             const tempHeight = barOneStyle.height;
+            const tempText = barOne.innerText;
             barOneStyle.height = barTwoStyle.height;
             barTwoStyle.height = tempHeight;
+            barOne.innerText = barTwo.innerText;
+            barTwo.innerText = tempText;
         }
         barOneStyle.backgroundColor = "#2667FF";
         barTwoStyle.backgroundColor = "#2667FF";

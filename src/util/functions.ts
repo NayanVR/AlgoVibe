@@ -1,4 +1,6 @@
 import getBubbleSortAnimations from "@/lib/sorting-algos/BubbleSort";
+import getInsertionSortAnimations from "@/lib/sorting-algos/InsertionSort";
+import getMergeSortAnimations from "@/lib/sorting-algos/MergeSort";
 import { AnimationArray } from "@/lib/types/sorting-algo";
 
 export function randomInt(min: number, max: number): number {
@@ -23,6 +25,10 @@ export function getAnimations(algo: string, allAlgos: any, array: number[]): Ani
     switch (algo) {
         case allAlgos.bubbleSort:
             return getBubbleSortAnimations([...array]);
+        case allAlgos.insertionSort:
+            return getInsertionSortAnimations([...array]);
+        case allAlgos.mergeSort:
+            return getMergeSortAnimations([...array]);
         default:
             return [];
     }

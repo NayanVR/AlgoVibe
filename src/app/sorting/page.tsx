@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BsArrowRepeat } from "react-icons/bs";
 import { MdRocketLaunch } from "react-icons/md";
 import { BiPowerOff } from "react-icons/bi";
-import SortingVisualizer from "@/components/SortingVisualizer";
+import { SortingVisualizer } from "@/components/SortingVisualizer";
 import { randomInt } from "@/util/functions";
 
 const sortingAlgos = {
   bubbleSort: "Bubble Sort",
   insertionSort: "Insertion Sort",
   mergeSort: "Merge Sort",
-  quickSort: "Quick Sort",
 };
 
 const clientWidth = document.documentElement.clientWidth;
@@ -23,7 +22,9 @@ export default function Sorting() {
   const [selectedAlgo, setSelectedAlgo] = useState<string>(
     sortingAlgos.bubbleSort
   );
-  const [isControlsDisabled, setIsControlsDisabled] = useState(false);
+  const [isControlsDisabled, setIsControlsDisabled] = useState<boolean>(false);
+
+  const visualizerRef = useRef<any>(null);
 
   function handleGenerateClick(): void {
     const newLength = randomInt(MIN_ARRAY_BARS, MAX_ARRAY_BARS);
@@ -32,10 +33,12 @@ export default function Sorting() {
 
   function handleStartClick(): void {
     setIsControlsDisabled(true);
+    visualizerRef.current.startClick();
   }
 
   function handleKillClick(): void {
     setIsControlsDisabled(false);
+    visualizerRef.current.killClick();
   }
 
   return (
@@ -45,13 +48,15 @@ export default function Sorting() {
           length={sizeOfArray}
           algo={selectedAlgo}
           allAlgos={sortingAlgos}
+          toggleControls={setIsControlsDisabled}
+          ref={visualizerRef}
         />
       </div>
       <div className="m-2 p-2 sm:mb-8 w-full max-w-xl border-gray-300 border rounded-xl flex flex-col sm:flex-row gap-2">
         <div className="w-full h-10 gap-2 flex">
           <button
             disabled={isControlsDisabled}
-            className="h-10 min-w-[2.5rem] bg-primary hover:bg-primary-dark transition-all rounded-lg"
+            className="h-10 min-w-[2.5rem] bg-primary hover:bg-primary-dark disabled:bg-gray-700 transition-all rounded-lg"
             onClick={handleGenerateClick}
           >
             <BsArrowRepeat color="white" className="mx-auto" />
@@ -76,7 +81,7 @@ export default function Sorting() {
             disabled={isControlsDisabled}
             onChange={(e) => setSelectedAlgo(e.target.value)}
             value={selectedAlgo}
-            className="h-10 w-full px-4 bg-[#f0f0f0] border border-tertiary font-text transition-all rounded-lg"
+            className="h-10 w-full px-4 bg-[#f0f0f0] text-gray-800 border border-tertiary disabled:border-gray-700 font-text transition-all rounded-lg"
           >
             {Object.values(sortingAlgos).map((algo) => {
               return (
@@ -88,7 +93,7 @@ export default function Sorting() {
           </select>
           <button
             disabled={isControlsDisabled}
-            className="h-10 min-w-[2.5rem] bg-secondary hover:bg-secondary-dark transition-all rounded-lg"
+            className="h-10 min-w-[2.5rem] bg-secondary hover:bg-secondary-dark disabled:bg-gray-700 transition-all rounded-lg"
             onClick={handleStartClick}
           >
             <MdRocketLaunch color="white" className="mx-auto" />

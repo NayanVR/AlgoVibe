@@ -12,6 +12,7 @@
   --secondary-dark: #f2a000;
   --tertiary: #4cc700;
   --tertiary-dark: #0c9b00;
+  --gray-700: rgb(55, 65, 81);
 }
 
 input[type="range"] {
@@ -51,4 +52,14 @@ input[type="range"]::-webkit-slider-runnable-track {
 input[type="range"]::-moz-range-track {
   height: 100%;
   background: #f0f0f0;
+}
+
+input[type="range"]:disabled::-webkit-slider-thumb {
+  box-shadow: -400px 0 0 400px var(--gray-700);
+  border: 2px solid var(--gray-700);
+}
+
+input[type="range"]:disabled::-moz-range-thumb {
+  border: 3px solid var(--gray-700);
+  box-shadow: -400px 0 0 400px var(--gray-700);
 }
