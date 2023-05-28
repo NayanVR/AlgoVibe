@@ -19,8 +19,8 @@ type Props = {
   toggleControls: (value: boolean) => void;
 };
 
-const clientHeight: number = document.documentElement.clientHeight;
-const clientWidth: number = document.documentElement.clientWidth;
+const clientHeight: number = window.innerHeight;
+const clientWidth: number = window.innerWidth;
 
 const BAR_MIN_HEIGHT: number = 25;
 const BAR_MAX_HEIGHT: number = (2 * clientHeight) / 3;
