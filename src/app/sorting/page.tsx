@@ -13,7 +13,7 @@ const sortingAlgos = {
   mergeSort: "Merge Sort",
 };
 
-const clientWidth = document.documentElement.clientWidth;
+const clientWidth = window.innerWidth;
 const MIN_ARRAY_BARS = clientWidth < 600 ? 5 : 10;
 const MAX_ARRAY_BARS = clientWidth < 600 ? 25 : 50;
 
