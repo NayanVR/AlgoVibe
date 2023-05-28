@@ -1,113 +1,93 @@
-import Image from 'next/image'
+import Game from "@/components/Game";
+import Image from "next/image";
+import Link from "next/link";
+import { BsArrowRight } from "react-icons/bs";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <nav className="absolute top-0 left-0 w-full flex gap-4 border-b-2 justify-center items-center h-16">
+        <img className="h-8" src="/logo.svg" />
+        <h1 className="font-heading font-bold text-2xl bg-gradient-to-b from-primary to-primary-dark bg-clip-text text-transparent">
+          AlgoVibe
+        </h1>
+      </nav>
+
+      {/* Hero Section */}
+
+      <main className="h-[90vh] sm:h-screen w-full overflow-hidden">
+        <div className="flex max-w-6xl px-8 items-center h-full mx-auto">
+          <div className="flex gap-6 flex-col justify-center items-center sm:items-start h-full text-center sm:text-left">
+            <h1 className="font-heading font-extrabold text-5xl sm:text-7xl bg-gradient-to-b from-primary to-primary-dark bg-clip-text text-transparent">
+              Watch
+              <br />
+              Dancing
+              <br />
+              Algorithms
+              <br />
+            </h1>
+            <p className="font-text text-gray-700">
+              AlgoVibe is a platform where you can visualize the algorithms that
+              confuse your brain.
+            </p>
+            <Link
+              className="relative group w-max font-bold font-text text-lg"
+              href="/sorting"
+            >
+              Let's Visualize
+              <BsArrowRight className="inline-block ml-2 h-full group-hover:translate-x-4 transition-all" />
+              <span className="block absolute bottom-0 left-0 -z-10 w-full h-1/2 bg-secondary"></span>
+            </Link>
+          </div>
+          <Image
+            src="/hero-illustration.png"
+            alt="tree-image"
+            className="w-1/2 hidden sm:block"
+            width={400}
+            height={400}
+          />
         </div>
+      </main>
+
+      {/* About Section */}
+
+      <div className="w-full h-32 bg-primary text-white flex items-center justify-center skew-y-6 sm:skew-y-3 relative group hover:-skew-y-6 sm:hover:-skew-y-3 transition-transform">
+        <span className="-skew-y-12 sm:-skew-y-6 font-heading font-extrabold text-3xl group-hover:skew-y-12 sm:group-hover:skew-y-6 transition-transform">
+          Who am i?
+        </span>
+        <div className="absolute top-0 left-0 bg-primary-dark w-full h-full -skew-y-12 sm:-skew-y-6 -z-10 group-hover:skew-y-12 sm:group-hover:skew-y-6 transition-transform"></div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+      <section className="w-full h-screen flex gap-8 px-8 max-w-6xl mx-auto justify-center items-center">
+        <Game />
+        <div className="flex flex-col gap-2 items-center sm:items-start">
+          <h2 className="font-text font-bold text-2xl mb-4 text-center sm:text-left text-gray-800">
+            Hi, I am Nayan Radadiya <br className="sm:hidden" />( NayanVR😉 )
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <SkillTile title="Web Developer" />
+          <SkillTile title="Graphic Designer" />
+          <SkillTile title="UI/UX Designer" />
+          <SkillTile title="Youtuber" />
+          <Link
+            className="relative group w-max mt-4 font-bold font-text text-lg"
+            href="https://www.nayanvr.in"
+            target="_blank"
+          >
+            My Portfolio
+            <BsArrowRight className="inline-block ml-2 h-full group-hover:translate-x-4 transition-all" />
+            <span className="block absolute bottom-0 left-0 -z-10 w-full h-1/2 bg-secondary"></span>
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+function SkillTile({ title }: { title: string }) {
+  return (
+    <h3 className="px-6 py-3 relative font-text font-medium w-full text-center sm:w-max group">
+      {title}
+      <span className="absolute bg-secondary top-0 left-0 w-full h-full -z-10 group-hover:w-0 transition-all duration-500"></span>
+    </h3>
+  );
 }

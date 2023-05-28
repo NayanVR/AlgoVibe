@@ -1,27 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary: #2667ff;
+  --primary-dark: #3b28cc;
+  --secondary: #ffc700;
+  --secondary-dark: #f2a000;
+  --tertiary: #4cc700;
+  --tertiary-dark: #0c9b00;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+input[type="range"] {
+  margin: auto;
+  -webkit-appearance: none;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 0; /* iOS */
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 0px;
+  height: 500px;
+  background: #fff;
+  box-shadow: -400px 0 0 400px var(--tertiary);
+  border: 2px solid var(--tertiary-dark);
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #fff;
+  width: 0px;
+  height: 100%;
+  border: 3px solid var(--tertiary-dark);
+  border-radius: 0 !important;
+  box-shadow: -400px 0 0 400px var(--tertiary);
+  box-sizing: border-box;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #f0f0f0;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 100%;
+  background: #f0f0f0;
 }
